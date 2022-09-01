@@ -1,8 +1,5 @@
 # CluckCluckGo
 A non-tracking modern Web browser.
-# Menu
-- ### [Development](cohejh.com)
-- ### [Compiling](cohejh.com)
 
 # Development
 
