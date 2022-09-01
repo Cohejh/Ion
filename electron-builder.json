@@ -1,5 +1,5 @@
 {
-  "appId": "org.wexond.wexond",
+  "appId": "org.cohejh.cluckcluckgo",
   "productName": "CluckCluckGo",
   "nsis": {
     "include": "static/installer.nsh"

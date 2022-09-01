@@ -1,8 +1,8 @@
 {
-  "name": "wexond",
-  "version": "6.0.0-nightly.2",
+  "name": "cluckcluckgo",
+  "version": "1.0.0",
   "sideEffects": false,
-  "description": "Extensible, fast and innovative web browser with material UI.",
+  "description": "A fast, non-tracking web browser, powered by electron, react, proton, neutron and Muffin Framework.",
   "keywords": [
     "web-browser",
     "material",
@@ -11,15 +11,15 @@
     "mobx",
     "styled-components"
   ],
-  "homepage": "https://github.com/wexond/wexond#readme",
+  "homepage": "https://github.com/cohejh/cluckcluckgo",
   "main": "build/main.bundle.js",
-  "author": "Eryk Rakowski <sentialx@gmail.com>",
+  "author": "COHEJH <jcohenkadosh@@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wexond/wexond.git"
+    "url": "git+https://github.com/cohejh/cluckcluckgo.git"
   },
   "bugs": {
-    "url": "https://github.com/wexond/wexond/issues"
+    "url": "https://github.com/cohejh/cluckcluckgo/issues"
   },
   "scripts": {
     "dev-renderer": "cross-env DEV=1 webpack serve --config webpack.config.renderer.js",
