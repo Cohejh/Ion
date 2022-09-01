@@ -1,6 +1,6 @@
 {
   "appId": "org.wexond.wexond",
-  "productName": "Wexond",
+  "productName": "CluckCluckGo",
   "nsis": {
     "include": "static/installer.nsh"
   },
@@ -43,7 +43,7 @@
   "fileAssociations": [
     {
       "name": "Document",
-      "description": "Wexond",
+      "description": "CluckCluckGo",
       "role": "Viewer",
       "ext": "html"
     }

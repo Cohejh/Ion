@@ -12,7 +12,7 @@ import { Application } from './application';
 export const isNightly = app.name === 'wexond-nightly';
 
 app.allowRendererProcessReuse = true;
-app.name = isNightly ? 'Wexond Nightly' : 'Wexond';
+app.name = isNightly ? 'Wexond Nightly' : 'CluckCluckGp';
 
 (process.env as any)['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
 
