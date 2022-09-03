@@ -60,6 +60,7 @@ export const ICON_WEATHER_DAY_RAIN = require('~/renderer/resources/icons/weather
 export const ICON_WEATHER_DAY_SHOWERS = require('~/renderer/resources/icons/weather/day/showers.png');
 export const ICON_WEATHER_DAY_SNOW = require('~/renderer/resources/icons/weather/day/snow.png');
 export const ICON_WEATHER_DAY_STORM = require('~/renderer/resources/icons/weather/day/storm.png');
+export const ICON_GENERAL = require('~/renderer/resources/icons/gear-solid.svg');
 
 export const ICON_WEATHER_NIGHT_CLEAR = require('~/renderer/resources/icons/weather/night/clear.png');
 export const ICON_WEATHER_NIGHT_FEW_CLOUDS = require('~/renderer/resources/icons/weather/night/few-clouds.png');

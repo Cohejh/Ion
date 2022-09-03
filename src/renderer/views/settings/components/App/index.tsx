@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { SettingsSection } from '../../store';
 import { Appearance } from '../Appearance';
+import { General } from '../General';
 import { AddressBar, ManageSearchEngines } from '../AddressBar';
 import { Privacy } from '../Privacy';
 import store from '../../store';
@@ -23,6 +24,7 @@ import {
   ICON_SHIELD,
   ICON_TRASH,
   ICON_EDIT,
+  ICON_GENERAL
 } from '~/renderer/constants';
 import {
   ContextMenuItem,
@@ -232,6 +234,9 @@ export default observer(() => {
           <div style={{ clear: 'both' }}></div>
         </Dialog>
         <NavigationDrawer title="Settings" search>
+          <MenuItem icon={ICON_GENERAL} section="general">
+            General
+          </MenuItem>
           <MenuItem icon={ICON_PALETTE} section="appearance">
             Appearance
           </MenuItem>
@@ -264,6 +269,7 @@ export default observer(() => {
         </NavigationDrawer>
         <Content>
           <LeftContent style={{ maxWidth: 800, marginTop: 56 }}>
+            {selectedSection === 'general' && <General />}
             {selectedSection === 'appearance' && <Appearance />}
             {selectedSection === 'autofill' && process.env.ENABLE_AUTOFILL && (
               <Autofill />

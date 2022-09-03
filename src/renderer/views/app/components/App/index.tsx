@@ -16,6 +16,7 @@ import {
   COMPACT_TAB_HEIGHT,
   DEFAULT_TAB_HEIGHT,
 } from '~/constants/design';
+import { NONMODAL_DIALOGS } from '~/constants';
 
 const onAppLeave = () => {
   store.barHideTimer = setTimeout(function () {
@@ -58,9 +59,7 @@ const App = observer(() => {
       <StyledApp
         onMouseOver={store.isFullscreen ? onAppEnter : undefined}
         onMouseLeave={store.isFullscreen ? onAppLeave : undefined}
-        style={{
-          height: !store.isFullscreen || store.titlebarVisible ? null : 0,
-        }}
+        modalOpen={store.modalOpen}
       >
         <UIStyle />
         <Titlebar />
