@@ -28,6 +28,19 @@ export class Settings extends EventEmitter {
       },
     );
 
+    ipcMain.handle('set-default-browser', async () => {
+      if (
+        !(
+          app.isDefaultProtocolClient('http') &&
+          app.isDefaultProtocolClient('https')
+        )
+      ) {
+        app.setAsDefaultProtocolClient('http');
+        app.setAsDefaultProtocolClient('https');
+      }
+    });
+
+
     ipcMain.on('get-settings-sync', async (e) => {
       await this.onLoad();
       this.update();

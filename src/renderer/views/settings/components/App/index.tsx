@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 
 import { SettingsSection } from '../../store';
 import { Appearance } from '../Appearance';
-import { General } from '../General';
 import { AddressBar, ManageSearchEngines } from '../AddressBar';
 import { Privacy } from '../Privacy';
 import store from '../../store';
@@ -15,6 +14,7 @@ import { OnStartup } from '../Startup';
 import { Content, LeftContent, Container } from '~/renderer/components/Pages';
 import { GlobalNavigationDrawer } from '~/renderer/components/GlobalNavigationDrawer';
 import { Downloads } from '../Downloads';
+import { General } from '../General';
 import {
   ICON_PALETTE,
   ICON_AUTOFILL,
@@ -234,7 +234,7 @@ export default observer(() => {
           <div style={{ clear: 'both' }}></div>
         </Dialog>
         <NavigationDrawer title="Settings" search>
-          <MenuItem icon={ICON_GENERAL} section="general">
+          <MenuItem section="general" icon={ICON_GENERAL}>
             General
           </MenuItem>
           <MenuItem icon={ICON_PALETTE} section="appearance">
