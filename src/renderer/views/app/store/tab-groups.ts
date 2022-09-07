@@ -72,8 +72,4 @@ export class TabGroupsStore {
     this.list.push(tabGroup);
     return tabGroup;
   }
-
-  public getGroups(): ITabGroup[] {
-    return this.list;
-  }
 }

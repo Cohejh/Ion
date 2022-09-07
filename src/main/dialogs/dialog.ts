@@ -51,7 +51,6 @@ export class PersistentDialog {
         nodeIntegration: true,
         contextIsolation: false,
         enableRemoteModule: true,
-        worldSafeExecuteJavaScript: false,
         ...webPreferences,
       },
     });

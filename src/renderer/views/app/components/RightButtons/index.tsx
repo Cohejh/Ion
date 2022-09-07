@@ -15,20 +15,11 @@ import store from '../../store';
 import { SiteButtons } from '../SiteButtons';
 
 let menuRef: HTMLDivElement = null;
-let downloadDialogRef: HTMLDivElement = null;
-
-const showDownloadDialog = async () => {
-  const { right, bottom } = downloadDialogRef.getBoundingClientRect();
-  store.downloadNotification = false;
-  ipcRenderer.send(`show-downloads-dialog-${store.windowId}`, right, bottom);
-};
-
-ipcRenderer.on('show-download-dialog', () => {
-  showDownloadDialog();
-});
 
 const onDownloadsClick = async (e: React.MouseEvent<HTMLDivElement>) => {
-  showDownloadDialog();
+  const { right, bottom } = e.currentTarget.getBoundingClientRect();
+  store.downloadNotification = false;
+  ipcRenderer.send(`show-downloads-dialog-${store.windowId}`, right, bottom);
 };
 
 const showMenuDialog = async () => {
@@ -74,7 +65,6 @@ export const RightButtons = observer(() => {
 
       {store.downloadsButtonVisible && (
         <ToolbarButton
-          divRef={(r) => (downloadDialogRef = r)}
           size={18}
           badge={store.downloadNotification}
           onMouseDown={onDownloadsClick}

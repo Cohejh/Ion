@@ -83,27 +83,7 @@ export class ViewManager extends EventEmitter {
     });
 
     ipcMain.on('change-zoom', (e, zoomDirection) => {
-      this.changeZoom(zoomDirection, e);
-    });
-
-    ipcMain.on('reset-zoom', (e) => {
-      this.resetZoom();
-    });
-
-    this.setBoundsListener();
-  }
-
-  public resetZoom() {
-    this.selected.webContents.zoomFactor = 1;
-    this.selected.emitEvent(
-      'zoom-updated',
-      this.selected.webContents.zoomFactor,
-    );
-    this.emitZoomUpdate();
-  }
-
-  public changeZoom(zoomDirection: 'in' | 'out', e?: any) {
-    const newZoomFactor =
+      const newZoomFactor =
         this.selected.webContents.zoomFactor +
         (zoomDirection === 'in'
           ? ZOOM_FACTOR_INCREMENT
@@ -119,9 +99,21 @@ export class ViewManager extends EventEmitter {
           this.selected.webContents.zoomFactor,
         );
       } else {
-        e?.preventDefault();
+        e.preventDefault();
       }
       this.emitZoomUpdate();
+    });
+
+    ipcMain.on('reset-zoom', (e) => {
+      this.selected.webContents.zoomFactor = 1;
+      this.selected.emitEvent(
+        'zoom-updated',
+        this.selected.webContents.zoomFactor,
+      );
+      this.emitZoomUpdate();
+    });
+
+    this.setBoundsListener();
   }
 
   public get selected() {

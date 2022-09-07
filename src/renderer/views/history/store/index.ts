@@ -183,8 +183,8 @@ export class Store {
   }
 
   public clear() {
-   (window as any).removeHistory(this.items.map((x) => x._id));
-     this.items = [];
+    this.items = [];
+    (window as any).removeHistory(this.items.map((x) => x._id));
   }
 
   public removeItems(id: string[]) {

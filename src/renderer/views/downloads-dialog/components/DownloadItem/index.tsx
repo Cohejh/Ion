@@ -14,8 +14,6 @@ import {
 import { IDownloadItem } from '~/interfaces';
 import prettyBytes = require('pretty-bytes');
 import { shell } from 'electron';
-import store from '../../store';
-import { DownloadItemMenu } from '../DownloadItemMenu';
 
 const onClick = (item: IDownloadItem) => () => {
   if (item.completed) {
@@ -23,11 +21,11 @@ const onClick = (item: IDownloadItem) => () => {
   }
 };
 
-const onMoreClick =
-  (item: IDownloadItem) => (e: React.MouseEvent<HTMLDivElement>) => {
-    store.openMenu(item);
-    e.stopPropagation();
-  };
+const onMoreClick = (item: IDownloadItem) => (
+  e: React.MouseEvent<HTMLDivElement>,
+) => {
+  e.stopPropagation();
+};
 
 export const DownloadItem = observer(({ item }: { item: IDownloadItem }) => {
   let received = prettyBytes(item.receivedBytes);
@@ -43,8 +41,8 @@ export const DownloadItem = observer(({ item }: { item: IDownloadItem }) => {
     <StyledDownloadItem onClick={onClick(item)}>
       <Icon></Icon>
       <Info>
-        <Title canceled={item.canceled}>{item.fileName}</Title>
-        {!item.completed && !item.canceled && (
+        <Title>{item.fileName}</Title>
+        {!item.completed && (
           <>
             <ProgressBackground>
               <Progress
@@ -53,19 +51,12 @@ export const DownloadItem = observer(({ item }: { item: IDownloadItem }) => {
                 }}
               ></Progress>
             </ProgressBackground>
-            <SecondaryText>{`${received}/${total} ${
-              item.paused ? ', Paused' : ''
-            }`}</SecondaryText>
+            <SecondaryText>{`${received}/${total}`}</SecondaryText>
           </>
         )}
-        {item.canceled && <SecondaryText>Canceled</SecondaryText>}
       </Info>
       <Separator></Separator>
-      <MoreButton
-        toggled={item.menuIsOpen}
-        onClick={onMoreClick(item)}
-      ></MoreButton>
-      <DownloadItemMenu item={item} visible={item.menuIsOpen} />
+      <MoreButton onClick={onMoreClick(item)}></MoreButton>
     </StyledDownloadItem>
   );
 });

@@ -1,5 +1,4 @@
-import { ipcRenderer } from 'electron';
-import * as remote from '@electron/remote';
+import { ipcRenderer, remote } from 'electron';
 import { observable, computed, makeObservable } from 'mobx';
 import { getTheme } from '~/utils/themes';
 import { ISettings } from '~/interfaces';

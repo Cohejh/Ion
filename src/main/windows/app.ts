@@ -32,7 +32,6 @@ export class AppWindow {
         javascript: true,
         // TODO: get rid of the remote module in renderers
         enableRemoteModule: true,
-        worldSafeExecuteJavaScript: false,
       },
       icon: resolve(
         app.getAppPath(),
