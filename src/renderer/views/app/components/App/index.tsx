@@ -58,9 +58,7 @@ const App = observer(() => {
       <StyledApp
         onMouseOver={store.isFullscreen ? onAppEnter : undefined}
         onMouseLeave={store.isFullscreen ? onAppLeave : undefined}
-        style={{
-          height: !store.isFullscreen || store.titlebarVisible ? null : 0,
-        }}
+        modalOpen={store.modalOpen}
       >
         <UIStyle />
         <Titlebar />
