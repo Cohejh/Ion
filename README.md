@@ -14,5 +14,11 @@ A non-tracking modern Web browser
 - Overlay (v1.2.0)
 - App Manager (v2.0.0)
 
+### Info
+
 Downloads [here](https://github.com/Cohejh/CluckCluckGo/releases)
+
+Report issues and request features [here](https://github.com/Cohejh/CluckCluckGo/issues)
+
+Check on the update progress [here](https://github.com/Cohejh/CluckCluckGo/projects)
 
