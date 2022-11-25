@@ -20,5 +20,5 @@ Downloads [here](https://github.com/Cohejh/CluckCluckGo/releases)
 
 Report issues and request features [here](https://github.com/Cohejh/CluckCluckGo/issues)
 
-Check on the update progress [here](https://github.com/Cohejh/CluckCluckGo/projects)
+Check on the update progress [here](https://github.com/users/Cohejh/projects/1/views/1)
 
