@@ -1,3 +1,4 @@
+![logo](icon.png)
 # CluckCluckGo
 A non-tracking modern Web browser
 
