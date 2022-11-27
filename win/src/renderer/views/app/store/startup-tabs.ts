@@ -1,7 +1,7 @@
 import { makeObservable, observable } from 'mobx';
 
 import { Store } from '.';
-import { remote } from 'electron';
+//import { remote } from 'electron';
 import { prefixHttp, isURL } from '~/utils';
 import { Database } from '~/models/database';
 import { IStartupTab } from '~/interfaces/startup-tab';
@@ -49,7 +49,8 @@ export class StartupTabsStore {
       this.clearStartupTabs(false, false);
     }
 
-    const args = remote.process.argv;
+    //const args = remote.process.argv;
+    const args = [];
     let needsNewTabPage = false;
     // If we have tabs saved, load them
     if (tabsToLoad && tabsToLoad.length > 0) {

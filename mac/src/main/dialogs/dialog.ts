@@ -50,7 +50,8 @@ export class PersistentDialog {
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
-        enableRemoteModule: true,
+        //enableRemoteModule: true,
+        //worldSafeExecuteJavaScript: false,
         ...webPreferences,
       },
     });
@@ -60,6 +61,8 @@ export class PersistentDialog {
     this.name = name;
 
     const { webContents } = this.browserView;
+
+    require('@electron/remote/main').enable(webContents);
 
     ipcMain.on(`hide-${webContents.id}`, () => {
       this.hide(false, false);

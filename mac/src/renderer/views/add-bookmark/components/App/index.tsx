@@ -6,7 +6,7 @@ import { StyledApp, Title, Row, Label, Buttons } from './style';
 import store from '../../store';
 import { Input, Dropdown } from '~/renderer/components/Input';
 import { Button } from '~/renderer/components/Button';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import { getBookmarkTitle } from '~/renderer/views/bookmarks/utils';
 import { UIStyle } from '~/renderer/mixins/default-styles';
 
@@ -26,7 +26,7 @@ const onChange = () => {
 
 const onDropdownClick = (e: React.MouseEvent<HTMLDivElement>) => {
   const { left, top, height } = e.currentTarget.getBoundingClientRect();
-  const menu = remote.Menu.buildFromTemplate([
+  const menu = require('@electron/remote').Menu.buildFromTemplate([
     ...store.folders.map((folder) => ({
       label: getBookmarkTitle(folder),
       click: () => {
@@ -37,9 +37,11 @@ const onDropdownClick = (e: React.MouseEvent<HTMLDivElement>) => {
     })),
   ]);
 
-  const { x, y } = remote.BrowserView.fromWebContents(
-    remote.getCurrentWebContents(),
-  ).getBounds();
+  const { x, y } = require('@electron/remote')
+    .BrowserView.fromWebContents(
+      require('@electron/remote').getCurrentWebContents(),
+    )
+    .getBounds();
 
   menu.popup({ x: x + left, y: y + top + height });
 };

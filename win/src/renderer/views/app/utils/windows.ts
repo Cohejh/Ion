@@ -1,6 +1,5 @@
-import { remote } from 'electron';
-
-export const getCurrentWindow = () => remote.getCurrentWindow();
+export const getCurrentWindow = () =>
+  require('@electron/remote').getCurrentWindow();
 
 export const closeWindow = () => {
   getCurrentWindow().close();

@@ -15,6 +15,17 @@ protocol.registerSchemesAsPrivileged([
       corsEnabled: false,
     },
   },
+  {
+    scheme: 'wexond',
+    privileges: {
+      bypassCSP: true,
+      secure: true,
+      standard: true,
+      supportFetchAPI: true,
+      allowServiceWorkers: true,
+      corsEnabled: false,
+    },
+  },
 ]);
 
 export const registerProtocol = (session: Electron.Session) => {

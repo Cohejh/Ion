@@ -12,7 +12,7 @@ import {
   RightControl,
 } from './style';
 import store from '../../store';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import { WEBUI_BASE_URL, WEBUI_URL_SUFFIX } from '~/constants/files';
 import { Switch } from '~/renderer/components/Switch';
 import {
@@ -58,7 +58,9 @@ const onFindInPageClick = () => {
 
 const onAlwaysClick = () => {
   store.alwaysOnTop = !store.alwaysOnTop;
-  remote.getCurrentWindow().setAlwaysOnTop(store.alwaysOnTop);
+  require('@electron/remote/main')
+    .getCurrentWindow()
+    .setAlwaysOnTop(store.alwaysOnTop);
 };
 
 const onNewWindowClick = () => {
@@ -103,7 +105,7 @@ export const QuickMenu = observer(() => {
             <>
               <MenuItem onClick={onUpdateClick}>
                 <Icon icon={ICON_FIRE}></Icon>
-                <MenuItemTitle>Update {remote.app.name}</MenuItemTitle>
+                <MenuItemTitle>Update remote.app.name</MenuItemTitle>
               </MenuItem>
               <Line />
             </>

@@ -5,6 +5,17 @@ import { ERROR_PROTOCOL, WEBUI_PROTOCOL } from '~/constants/files';
 
 protocol.registerSchemesAsPrivileged([
   {
+    scheme: 'cluckcluckgo',
+    privileges: {
+      bypassCSP: true,
+      secure: true,
+      standard: true,
+      supportFetchAPI: true,
+      allowServiceWorkers: true,
+      corsEnabled: false,
+    },
+  },
+  {
     scheme: 'wexond',
     privileges: {
       bypassCSP: true,

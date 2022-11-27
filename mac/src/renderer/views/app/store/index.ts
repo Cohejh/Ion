@@ -3,7 +3,7 @@ import { observable, computed, makeObservable, makeAutoObservable } from 'mobx';
 import { TabsStore } from './tabs';
 import { TabGroupsStore } from './tab-groups';
 import { AddTabStore } from './add-tab';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import { ExtensionsStore } from './extensions';
 import { SettingsStore } from './settings';
 import { getCurrentWindow } from '../utils/windows';
@@ -84,15 +84,17 @@ export class Store {
   // Computed
 
   public get downloadProgress() {
-    const downloading = this.downloads.filter((x) => !x.completed);
+    const downloading = this.downloads.filter(
+      (x) => !x.completed && !x.canceled && !x.paused,
+    );
 
     if (downloading.length === 0) return 0;
 
-    const { totalBytes } = this.downloads.reduce((prev, cur) => ({
+    const { totalBytes } = downloading.reduce((prev, cur) => ({
       totalBytes: prev.totalBytes + cur.totalBytes,
     }));
 
-    const { receivedBytes } = this.downloads.reduce((prev, cur) => ({
+    const { receivedBytes } = downloading.reduce((prev, cur) => ({
       receivedBytes: prev.receivedBytes + cur.receivedBytes,
     }));
 
@@ -126,7 +128,7 @@ export class Store {
 
     const url = this.addressbarValue;
 
-    const whitelistedProtocols = ['https', 'http', 'ftp', 'cluckcluckgo', 'wexond'];
+    const whitelistedProtocols = ['https', 'http', 'ftp', 'cluckcluckgo','wexond'];
 
     for (let i = 0; i < url.length; i++) {
       const protocol = whitelistedProtocols.find(
@@ -214,9 +216,18 @@ export class Store {
       this.downloadsButtonVisible = true;
     });
 
+    ipcRenderer.on('download-removed', (e, id: string) => {
+      const downloads = this.downloads.filter((x) => x.id !== id);
+      this.downloadsButtonVisible = downloads.length > 0;
+      this.downloads = downloads;
+    });
+
     ipcRenderer.on('download-progress', (e, item: IDownloadItem) => {
-      const i = this.downloads.find((x) => x.id === item.id);
-      i.receivedBytes = item.receivedBytes;
+      const index = this.downloads.findIndex((x) => x.id === item.id);
+      this.downloads[index] = {
+        ...this.downloads[index],
+        ...item,
+      };
     });
 
     ipcRenderer.on('is-bookmarked', (e, flag) => {
@@ -229,15 +240,22 @@ export class Store {
         const i = this.downloads.find((x) => x.id === id);
         i.completed = true;
 
-        if (this.downloads.filter((x) => !x.completed).length === 0) {
-          this.downloads = [];
-        }
-
         if (downloadNotification) {
           this.downloadNotification = true;
         }
       },
     );
+
+    ipcRenderer.on('download-paused', (e, id: string) => {
+      const i = this.downloads.find((x) => x.id === id);
+      i.paused = true;
+    });
+
+    ipcRenderer.on('download-canceled', (e, id: string) => {
+      const i = this.downloads.find((x) => x.id === id);
+      i.completed = false;
+      i.canceled = true;
+    });
 
     ipcRenderer.on('find', () => {
       const tab = this.tabs.selectedTab;
@@ -267,7 +285,7 @@ export class Store {
           );
 
           if (data.focus) {
-            remote.getCurrentWebContents().focus();
+            require('@electron/remote').getCurrentWebContents().focus();
             this.inputRef.focus();
           }
 

@@ -7,7 +7,6 @@ import { BLUE_500 } from '~/renderer/constants';
 import { observer } from 'mobx-react-lite';
 import { onSwitchChange } from '../../utils';
 import { Switch } from '~/renderer/components/Switch';
-import { ipcRenderer } from 'electron';
 
 const onClearBrowsingData = () => {
   store.dialogContent = 'privacy';
@@ -31,14 +30,6 @@ const DoNotTrackToggle = observer(() => {
 export const Privacy = () => {
   return (
     <>
-      <Header>Default Browser</Header>
-      <Button
-        onClick={async () => {
-          await ipcRenderer.invoke('set-default-browser');
-        }}
-      >
-        Set as Default
-      </Button>
       <Header>Privacy</Header>
       <Button
         type="outlined"

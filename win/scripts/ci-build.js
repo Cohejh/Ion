@@ -40,7 +40,7 @@ const getInput = (name) => {
         name: 'wexond-nightly',
         repository: {
           type: 'git',
-          url: 'git+https://github.com/wexond/desktop-nightly.git',
+          url: 'git+https://github.com/john-do3/desktop-nightly.git',
         },
       };
       await promises.writeFile(
@@ -79,7 +79,7 @@ const getInput = (name) => {
 
     run('yarn run build');
     run(
-      `npx --no-install electron-builder --${platform} ${
+      `npx --no-install electron-builder --publish never --${platform} ${
         release ? '-p always' : ''
       }`,
     );

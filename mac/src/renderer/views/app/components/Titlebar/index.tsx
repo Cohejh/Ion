@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer } from 'electron';
 
 import store from '../../store';
 import { Tabbar } from '../Tabbar';
@@ -27,7 +27,7 @@ const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
 };
 
 const onFullscreenExit = (e: React.MouseEvent<HTMLDivElement>) => {
-  remote.getCurrentWindow().setFullScreen(false);
+  require('@electron/remote/main').getCurrentWindow().setFullScreen(false);
 };
 
 export const Titlebar = observer(() => {
@@ -41,16 +41,17 @@ export const Titlebar = observer(() => {
       <Tabbar />
       {store.isCompact && <RightButtons />}
 
-      {platform() !== 'darwin' && (
-        store.isFullscreen
-          ? <FullscreenExitButton
+      {platform() !== 'darwin' &&
+        (store.isFullscreen ? (
+          <FullscreenExitButton
             style={{
               height: store.isCompact ? '100%' : 32,
             }}
             onMouseUp={onFullscreenExit}
             theme={store.theme}
           />
-          : <WindowsControls
+        ) : (
+          <WindowsControls
             style={{
               height: store.isCompact ? '100%' : 32,
               WebkitAppRegion: 'no-drag',
@@ -61,7 +62,7 @@ export const Titlebar = observer(() => {
             onMaximize={onMaximizeClick}
             dark={store.theme['toolbar.lightForeground']}
           />
-      )}
+        ))}
     </StyledTitlebar>
   );
 });

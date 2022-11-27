@@ -13,9 +13,9 @@ import {
   TabContainer,
 } from './style';
 import { ICON_VOLUME_HIGH, ICON_VOLUME_OFF } from '~/renderer/constants';
-import { ITab } from '../../models';
+import { ITab, ITabGroup } from '../../models';
 import store from '../../store';
-import { remote, ipcRenderer } from 'electron';
+import { ipcRenderer, nativeImage, Menu } from 'electron';
 import { COMPACT_TAB_MARGIN_TOP } from '~/constants/design';
 
 const removeTab = (tab: ITab) => (e: React.MouseEvent<HTMLDivElement>) => {
@@ -105,7 +105,11 @@ const onMouseUp = (tab: ITab) => (e: React.MouseEvent<HTMLDivElement>) => {
 };
 
 const onContextMenu = (tab: ITab) => () => {
-  const menu = remote.Menu.buildFromTemplate([
+  const tabGroups: ITabGroup[] = store.tabGroups
+    .getGroups()
+    .filter((t) => t.id !== tab.tabGroupId);
+
+  const menu = require('@electron/remote').Menu.buildFromTemplate([
     {
       label: 'New tab to the right',
       click: () => {
@@ -119,11 +123,15 @@ const onContextMenu = (tab: ITab) => () => {
     },
     {
       label: 'Add to a new group',
+      visible: tabGroups.length === 0,
       click: () => {
-        const tabGroup = store.tabGroups.addGroup();
-        tab.tabGroupId = tabGroup.id;
-        store.tabs.updateTabsBounds(true);
+        addTabToNewGroup(tab);
       },
+    },
+    {
+      label: 'Add tab to group',
+      visible: tabGroups.length > 0,
+      submenu: tabGroupSubmenu(tab, tabGroups),
     },
     {
       label: 'Remove from group',
@@ -215,6 +223,69 @@ const onContextMenu = (tab: ITab) => () => {
   menu.popup();
 };
 
+const addTabToNewGroup = (tab: ITab): void => {
+  tab.removeFromGroup();
+  const tabGroup = store.tabGroups.addGroup();
+  tab.tabGroupId = tabGroup.id;
+  store.tabs.updateTabsBounds(true);
+};
+
+const tabGroupSubmenu = (tab: ITab, tabGroups: ITabGroup[]): Menu => {
+  return require('@electron/remote').Menu.buildFromTemplate([
+    {
+      label: 'New group',
+      click: () => {
+        addTabToNewGroup(tab);
+      },
+    },
+    {
+      type: 'separator',
+    },
+    ...tabGroups.map((tabGroup) => ({
+      label: tabGroupLabel(tabGroup),
+      icon: tabGroupIcon(tabGroup.color),
+      click: () => {
+        store.tabs.setTabToGroup(tab, tabGroup.id);
+      },
+    })),
+  ]);
+};
+
+const tabGroupLabel = (tabGroup: ITabGroup): string => {
+  const tabs = store.tabs.list.filter((x) => x.tabGroupId === tabGroup.id);
+  const tabsLength = tabs.length;
+  const tabTitle = tabs[0].title;
+
+  let label =
+    tabGroup.name ||
+    `"${tabTitle.substr(0, 20)}${tabTitle.length > 20 ? '... ' : ''}"`;
+
+  if (!tabGroup.name && tabsLength > 1) {
+    label += ` and ${tabsLength - 1} other tabs`;
+  }
+  return label;
+};
+
+const tabGroupIcon = (color: string): nativeImage => {
+  var canvas = document.createElement('canvas');
+  var context = canvas.getContext('2d');
+  canvas.width = canvas.height = 12;
+
+  context.fillStyle = color;
+  context.beginPath();
+  context.ellipse(
+    canvas.width / 2,
+    canvas.height / 2,
+    canvas.width / 2,
+    canvas.height / 2,
+    0,
+    0,
+    Math.PI * 2,
+  );
+  context.fill();
+  return nativeImage.createFromDataURL(canvas.toDataURL());
+};
+
 const Content = observer(({ tab }: { tab: ITab }) => {
   return (
     <StyledContent>
@@ -238,7 +309,7 @@ const Content = observer(({ tab }: { tab: ITab }) => {
       )}
       {!tab.isPinned && (
         <StyledTitle isIcon={tab.isIconSet} selected={tab.isSelected}>
-          {tab.title}
+          {tab.isSelected && store.isCompact ? tab.url : tab.title}
         </StyledTitle>
       )}
       <ExpandedVolume tab={tab} />
@@ -317,7 +388,7 @@ export default observer(({ tab }: { tab: ITab }) => {
             : defaultColor,
           borderColor:
             tab.isSelected && tab.tabGroupId !== -1 && !store.isCompact
-              ? tab.tabGroup.color
+              ? tab.tabGroup?.color
               : 'transparent',
         }}
       >

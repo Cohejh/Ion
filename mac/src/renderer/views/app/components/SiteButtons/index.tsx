@@ -9,7 +9,7 @@ import {
   ICON_MAGNIFY_MINUS,
   ICON_SHIELD,
 } from '~/renderer/constants/icons';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import { parse } from 'url';
 import store from '../../store';
 import { ToolbarButton } from '../ToolbarButton';
@@ -64,7 +64,7 @@ ipcRenderer.on('zoom-factor-updated', (e, zoomFactor, showDialog) => {
 });
 
 const onShieldContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
-  const menu = remote.Menu.buildFromTemplate([
+  const menu = require('@electron/remote/main').Menu.buildFromTemplate([
     {
       checked: store.settings.object.shield,
       label: 'Enabled',

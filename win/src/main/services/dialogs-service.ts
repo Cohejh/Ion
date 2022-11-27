@@ -64,11 +64,13 @@ export class DialogsService {
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
-        enableRemoteModule: true,
+        //enableRemoteModule: true,
         webviewTag: true,
+        //worldSafeExecuteJavaScript: false,
       },
     });
 
+    require('@electron/remote/main').enable(view.webContents);
     view.webContents.loadURL(`about:blank`);
 
     this.browserViews.push(view);
@@ -102,9 +104,8 @@ export class DialogsService {
       browserView = this.createBrowserView();
     }
 
-    const appWindow = Application.instance.windows.fromBrowserWindow(
-      browserWindow,
-    );
+    const appWindow =
+      Application.instance.windows.fromBrowserWindow(browserWindow);
 
     if (foundDialog && tabAssociation) {
       foundDialog.tabIds.push(tabAssociation.tabId);

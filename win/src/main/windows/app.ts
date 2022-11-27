@@ -31,7 +31,8 @@ export class AppWindow {
         contextIsolation: false,
         javascript: true,
         // TODO: get rid of the remote module in renderers
-        enableRemoteModule: true,
+        //enableRemoteModule: true,
+        //worldSafeExecuteJavaScript: false,
       },
       icon: resolve(
         app.getAppPath(),
@@ -75,6 +76,7 @@ export class AppWindow {
       }
     })();
 
+    require('@electron/remote/main').enable(this.win.webContents);
     this.win.show();
 
     // Update window bounds on resize and on move when window is not maximized.
@@ -150,9 +152,10 @@ export class AppWindow {
         Application.instance.sessions.unloadIncognitoExtensions();
       }
 
-      Application.instance.windows.list = Application.instance.windows.list.filter(
-        (x) => x.win.id !== this.win.id,
-      );
+      Application.instance.windows.list =
+        Application.instance.windows.list.filter(
+          (x) => x.win.id !== this.win.id,
+        );
     });
 
     // this.webContents.openDevTools({ mode: 'detach' });

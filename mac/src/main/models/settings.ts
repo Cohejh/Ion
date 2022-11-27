@@ -1,4 +1,4 @@
-import { ipcMain, nativeTheme, dialog, app } from 'electron';
+import { ipcMain, nativeTheme, dialog } from 'electron';
 
 import { DEFAULT_SETTINGS, DEFAULT_SEARCH_ENGINES } from '~/constants';
 
@@ -27,18 +27,6 @@ export class Settings extends EventEmitter {
         this.updateSettings(JSON.parse(settings));
       },
     );
-
-    ipcMain.handle('set-default-browser', async () => {
-      if (
-        !(
-          app.isDefaultProtocolClient('http') &&
-          app.isDefaultProtocolClient('https')
-        )
-      ) {
-        app.setAsDefaultProtocolClient('http');
-        app.setAsDefaultProtocolClient('https');
-      }
-    });
 
     ipcMain.on('get-settings-sync', async (e) => {
       await this.onLoad();
