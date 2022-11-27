@@ -10,9 +10,10 @@ A non-tracking modern Web browser
 - Extensions
 
 **Coming Soon:**
-- Browser Prefrences (v1.0.1)
-- New UI (v1.1.0)
-- Overlay (v1.2.0)
+- Electron 20 Upgrade (v1.1.0)
+- Browser Prefrences (v1.3.0)
+- New UI (v1.8.0)
+- Overlay (v1.9.0)
 - App Manager (v2.0.0)
 
 ### Info
