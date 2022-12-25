@@ -1,5 +1,7 @@
-![logo](icon.png)
+<p align="center">
+  ![logo](icon.png)
 <a href="https://github.com/Cohejh/CluckCluckGo/releases"><img src="https://img.shields.io/github/downloads/COHEJH/CluckCluckGo/total?style=for-the-badge"></a>
+ </p>
 
 # CluckCluckGo
 A non-tracking modern Web browser
