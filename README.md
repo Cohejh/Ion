@@ -1,8 +1,8 @@
 <a href="https://github.com/Cohejh/CluckCluckGo/releases"><img src="https://img.shields.io/github/downloads/COHEJH/CluckCluckGo/total?style=for-the-badge"></a>
-<a href="https://github.com/Cohejh/CluckCluckGo/"><img src="https://img.shields.io/github/languages/count/Cohejh/CluckCluckGo?color=%2397CA00&label=Languages%20used&style=for-the-badge"></a>
-<a href="https://github.com/Cohejh/CluckCluckGo/"><img src="https://img.shields.io/github/license/cohejh/cluckcluckgo?style=for-the-badge"></a>
+<img src="https://img.shields.io/github/languages/count/Cohejh/CluckCluckGo?color=%2397CA00&label=Languages%20used&style=for-the-badge">
+<img src="https://img.shields.io/github/license/cohejh/cluckcluckgo?style=for-the-badge">
 <a href="https://cohejh.com"><img src="https://img.shields.io/badge/Website-cohejh.com-green?style=for-the-badge&logo=google-chrome&logoColor=white"></a>
-
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/cohejh/cluckcluckgo?color=green&label=version&style=for-the-badge">
 # CluckCluckGo
 A non-tracking modern Web browser
 
