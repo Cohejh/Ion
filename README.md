@@ -14,10 +14,9 @@ A non-tracking modern Web browser
 - Extensions
 
 **Coming Soon:**
-- Browser Prefrences (v1.1.1)
-- New UI (v1.8.0)
-- Overlay (v1.9.0)
-- App Manager (v2.0.0)
+- Settings Update (v1.2)
+- Privacy Update (v1.3)
+- UI Update (v1.4.0)
 
 ### Info
 
