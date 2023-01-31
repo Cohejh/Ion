@@ -6,6 +6,8 @@
 # Ion
 A non-tracking modern Web browser
 
+**Formerly CluckCluckGo**
+
 ### Features
 - Intuitive UI
 - Tab Grouping
