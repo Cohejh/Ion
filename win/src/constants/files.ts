@@ -2,9 +2,9 @@ import { DEFAULT_SETTINGS } from './settings';
 
 export const DIRECTORIES = ['adblock', 'extensions', 'storage'];
 
-export const WEBUI_PROTOCOL = 'cluckcluckgo';
+export const WEBUI_PROTOCOL = 'ion';
 
-export const ERROR_PROTOCOL = 'cluckcluckgo-error';
+export const ERROR_PROTOCOL = 'ion-error';
 
 export const NETWORK_ERROR_HOST = 'network-error';
 

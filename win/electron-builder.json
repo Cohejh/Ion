@@ -1,6 +1,6 @@
 {
-  "appId": "org.cohejh.cluckcluckgo",
-  "productName": "CluckCluckGo",
+  "appId": "org.cohejh.ion",
+  "productName": "Ion",
   "nsis": {
     "include": "static/installer.nsh"
   },
@@ -47,7 +47,7 @@
   "fileAssociations": [
     {
       "name": "Document",
-      "description": "CluckCluckGo",
+      "description": "Ion",
       "role": "Viewer",
       "ext": "html"
     }

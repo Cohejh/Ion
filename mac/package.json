@@ -1,5 +1,5 @@
 {
-  "name": "cluckcluckgo",
+  "name": "ion",
   "version": "1.1.0",
   "sideEffects": false,
   "description": "A fast, modern private browser.",
@@ -15,17 +15,18 @@
     "firefox",
     "cluckcluckgo",
     "wexond",
-    "google"
+    "google",
+    "ion"
   ],
-  "homepage": "https://github.com/Cohejh/CluckCluckGo#readme",
+  "homepage": "https://github.com/Cohejh/Ion#readme",
   "main": "build/main.bundle.js",
   "author": "COHEJH <jcohenkadosh@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cohejh/CluckCluckGo.git"
+    "url": "git+https://github.com/Cohejh/Ion.git"
   },
   "bugs": {
-    "url": "https://github.com/Cohejh/CluckCluckGo/issues"
+    "url": "https://github.com/Cohejh/Ion/issues"
   },
   "scripts": {
     "dev-renderer": "cross-env DEV=1 webpack serve --config webpack.config.renderer.js",
