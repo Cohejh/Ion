@@ -1,4 +1,5 @@
 import { createHash } from 'crypto';
+// Noot Noot
 
 function calcLength(a: number, b: number, c: number, d: number) {
   let length = 0;
